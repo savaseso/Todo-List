@@ -19,7 +19,6 @@ class App extends Component {
     ]
   }
   render() {
-    console.log(this.props.todos)
     return (
       <div className="App">
         <Todos todos={this.state.todos} />
