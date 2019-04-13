@@ -37,12 +37,23 @@ delTodo=(id) => {
 this.setState({todos:[...this.state.todos.filter(todo=>todo.id!==id)]});
 }
 
+addTodo = (title) => {
+  let id = Date.now()
+  const newTodo = {
+    id:id,
+    title:title,
+    completed:false
+  }
+  this.setState({ todos: [...this.state.todos, newTodo]
+  })
+}
+
   render() {
     return (
       <div className="App">
         <div className="container">
           <Header />
-          <Addtodo />
+          <Addtodo addTodo={this.addTodo} />
           <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
         </div>
       </div>
