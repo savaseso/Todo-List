@@ -33,18 +33,10 @@ this.setState({todos:[...this.state.todos.filter(todo=>todo.id!==id)]});
 }
 
 addTodo = (title) => {
-  let id = Date.now()
-  const newTodo = {
-    id:id,
+  axios.post('https://jsonplaceholder.typicode.com/todos?_limit=10', {
     title:title,
-    completed:false
-  }
-  
-  if(!title){
-    return
-  }else{
-  this.setState({ todos: [...this.state.todos, newTodo]
-  })}
+    completed:false})
+  .then(res => this.setState({ todos: [...this.state.todos, res.data] }))
 }
 
   render() {
