@@ -5,23 +5,16 @@ import Header from './components/layout/Header'
 import Addtodo from './components/Addtodo';
 import About from './components/pages/About';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 1,
-        title: 'Take out the trash',
-        completed: false
-      },
-      { id: 2,
-        title: 'Learning React',
-        completed: false
-      },
-      { id: 3,
-        title: 'Meeting with boss',
-        completed: false
-      }
-    ]
+    todos: []
+  }
+
+   componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    .then(res => this.setState({todos: res.data}))
   }
   //Toggle complete
 markComplete = (id)=> {
@@ -46,8 +39,12 @@ addTodo = (title) => {
     title:title,
     completed:false
   }
+  
+  if(!title){
+    return
+  }else{
   this.setState({ todos: [...this.state.todos, newTodo]
-  })
+  })}
 }
 
   render() {
